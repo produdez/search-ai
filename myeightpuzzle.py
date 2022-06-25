@@ -10,11 +10,12 @@
 # (denero@cs.berkeley.edu) and Dan Klein (klein@cs.berkeley.edu).
 # Student side autograding was added by Brad Miller, Nick Hay, and
 # Pieter Abbeel (pabbeel@cs.berkeley.edu).
-import puzzle
-import search
+import modules.search as search
+import modules.puzzle as puzzle
 import random
     
-# Module Classes
+
+# ! Problem Definition ----------------------------------------------------
 
 class EightPuzzleState(puzzle.PuzzleState):
     """
@@ -182,7 +183,6 @@ class EightPuzzleState(puzzle.PuzzleState):
     def __str__(self):
         return self.__getAsciiString()
 
-# TODO: Implement The methods in this class
 
 class EightPuzzleSearchProblem(search.SearchProblem):
     """
@@ -219,6 +219,9 @@ class EightPuzzleSearchProblem(search.SearchProblem):
         be composed of legal moves
         """
         return len(actions)
+
+
+# ! Puzzle Data ----------------------------------------------------
 
 EIGHT_PUZZLE_DATA = [[1, 0, 2, 3, 4, 5, 6, 7, 8],
                      [1, 7, 8, 2, 3, 4, 5, 6, 0],
@@ -261,6 +264,7 @@ def createRandomEightPuzzle(moves=100):
         puzzle = puzzle.result(random.sample(puzzle.legalMoves(), 1)[0])
     return puzzle
 
+# ! Heuristics ----------------------------------------------------
 
 def heuristic_misplaced_titles(state):
     heuristic = 0
@@ -281,10 +285,17 @@ def heuristic_simple_path(state):
             current = cells[i][j]
             heuristic += abs(i - current//3) + abs(j-current%3)
         return heuristic    
+
+# ! TESTs ----------------------------------------------------
+
 if __name__ == '__main__':
-    puzzle = createRandomEightPuzzle(input('Number of Random moves to make: ? '))
-    # puzzle = loadEightPuzzle(0)
+    # Puzzle start at normal state then with added random moves
+    # NOTE: you can also choose a puzzle from `EIGHT_PUZZLE_DATA` using loadEightPuzzle(index)
+    puzzle = createRandomEightPuzzle(int(input('Number of Random moves to make: ? ')))
+
+    # Create problem from data
     problem = EightPuzzleSearchProblem(puzzle)
-    
-    # search.test_search_problem(problem,search.breadthFirstSearch)
-    search.test_search_problem(problem, search.greedySearch, heuristic= heuristic_simple_path,print_state=True)
+
+    # Start search and show result
+    # NOTE: Any search from module search.py is good, if heuristics are provided in this file if needed!
+    search.test_search_problem(problem, search.greedySearch, heuristic= heuristic_simple_path,print_state=False)

@@ -1,7 +1,9 @@
-import search
 import random
-import puzzle
+import modules.search as search
+import modules.puzzle as puzzle
 import copy
+
+# ! Problem Def  ----------------------------------------------------
 
 class Cup:
     def __init__(self, name, cup_size):
@@ -193,6 +195,9 @@ class CupSearchProblem(search.SearchProblem):
         """
         return len(actions)
 
+# ! DATA  ----------------------------------------------------
+
+
 def loadCupPuzzle(n):
     """
         load map with index n (start 0)
@@ -218,11 +223,10 @@ def test():
     print(next_state)
     return
         
-    
+# ! TESTS  ----------------------------------------------------
+
 
 if __name__ == '__main__':
-    # test()
-    # exit()
 
     puzzle = loadCupPuzzle(int(input('Problem Index:? ')))
     problem = CupSearchProblem(puzzle)

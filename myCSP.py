@@ -586,7 +586,7 @@ if __name__ == '__main__':
 
 
     # backtrack_nqueen()
-    # backtrack_cryptoarithmetic()
+    backtrack_cryptoarithmetic()
     # backtrack_mapcoloring()
 
     pass

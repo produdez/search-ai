@@ -1,7 +1,10 @@
-import search
 import random
-import puzzle
+import modules.search as search
+import modules.puzzle as puzzle
 import copy
+
+# ! Problem def ----------------------------------------------------
+
 
 class NQueenState(puzzle.PuzzleState):
     """
@@ -152,22 +155,14 @@ class NQueenSearchProblem(search.SearchProblem):
         """
         return len(actions)
 
-def loadEmptyChessBoard(n):
-    pass
-
-def test():
-    puzzle = NQueenState(4)
-    problem = NQueenSearchProblem(puzzle)
-    print(problem.puzzle)
-    suc = problem.getSuccessors(puzzle)[0]
-    print(suc[0])
+# ! Heuristics  ----------------------------------------------------
 
 def empty_Heuristics(state):
     return -state.empty
 
+# ! TESTs ----------------------------------------------------
+
 if __name__ == '__main__':
-    # test()
-    # exit()
     puzzle = NQueenState(int(input('BoardSize:? ')))
     problem = NQueenSearchProblem(puzzle)
     search.test_search_problem(problem,search.depthFirstSearch,print_state=False)

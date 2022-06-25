@@ -1,8 +1,10 @@
-import search
 import random
-import puzzle
+import modules.search as search
+import modules.puzzle as puzzle
 import copy
 from itertools import combinations 
+
+# ! Problem Def ----------------------------------------------------
 
 class Boat:
     def __init__(self, capacity):
@@ -233,6 +235,8 @@ class RiverCrossingSearchProblem(search.SearchProblem):
         """
         return len(actions)
 
+# ! Data ----------------------------------------------------
+
 def loadRiverPuzzle():
     """
         load map with index n (start 0)
@@ -252,23 +256,10 @@ def loadRiverPuzzle():
     return RiverCrossingPuzzleState(boat,leftside,rightside,init_location,prohibited_sets,goal,must_have_passenger=must_have_boat_people)
     
 
-def test():
-    puzzle = loadRiverPuzzle()
-    problem = RiverCrossingSearchProblem(puzzle)
-    # print(problem.getStartState())
-    
-    # successor = problem.getSuccessors(puzzle)[0]
-    # # print('successors:', str(successor))
-    # next_state = problem.getStartState().result(successor[1])
-    # print(next_state)
-    search.test_search_problem(problem,search.depthFirstSearch,print_state=False)
-    return
         
-    
+# ! TESTs ----------------------------------------------------
 
 if __name__ == '__main__':
-    # test()
-    # exit()
 
     puzzle = loadRiverPuzzle()
     problem = RiverCrossingSearchProblem(puzzle)
